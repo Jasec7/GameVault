@@ -43,8 +43,7 @@ class Console:
         CURSOR.execute(sql)
         CONN.commit()
 
-    @classmethod
-    def save(cls):
+    def save(self):
         """ Insert a new row with the name value of the current Console instance.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
@@ -53,11 +52,11 @@ class Console:
             VALUES (?)
         """
 
-        CURSOR.execute(sql, (self.name))
+        CURSOR.execute(sql, (self.name,))
         CONN.commit()
 
-        #self.id = CURSOR.lastrowid
-        #type(self).all[self.id] = self
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
 
     def update(self):
         """Update the table row corresponding to the current Console instance."""
@@ -66,6 +65,23 @@ class Console:
             SET name = ?
             WHERE id = ?
         """
+        
         CURSOR.execute(sql,(self.name, self.id))
         CONN.commit()
+
+    def delete(self):
+        """Delete the table row corresponding to the current Console instance,
+        delete the dictionary entry, and reassign id attribute"""
+
+        sql = """
+            DELETE FROM consoles
+            WHERE id = ?
+        """
+        if self.id is not None:
+            CURSOR.execute(sql, (self.id,))
+            CONN.commit()
+
+        if self.id in type(self).all:
+            del type(self).all[self.id]
+        self.id = None
 
