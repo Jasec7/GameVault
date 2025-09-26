@@ -88,6 +88,8 @@ class Console:
     @classmethod
     def instance_from_db(cls, row):
         """Return a Console object having the attribute values from the table row"""
+        if not row:
+            return None
 
         console = cls.all.get(row[0])
         if console:
@@ -102,12 +104,23 @@ class Console:
     def get_all(cls):
         """Return a list containing a Console object per row in the table"""
 
-    sql = """
-        SELECT *
-        FROM consoles
-    """
-    row = CURSOR.execute(sql,(id,)).fetchall()
-    return [cls.instance_fromdb(row) for row in rows]
+        sql = """
+            SELECT *
+            FROM consoles
+        """
+        row = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
 
-    
+    @classmethod
+    def find_by_id(cls,id):
+        """Return a Console object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT * 
+            FROM consoles
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql,(id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
+
 
