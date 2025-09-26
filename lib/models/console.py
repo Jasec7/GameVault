@@ -85,3 +85,29 @@ class Console:
             del type(self).all[self.id]
         self.id = None
 
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a Console object having the attribute values from the table row"""
+
+        console = cls.all.get(row[0])
+        if console:
+            console.name = row[1]
+        else:
+            console = cls(row[1])
+            console.id = row[0]
+            cls.all[console.id] = console
+        return console
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Console object per row in the table"""
+
+    sql = """
+        SELECT *
+        FROM consoles
+    """
+    row = CURSOR.execute(sql,(id,)).fetchall()
+    return [cls.instance_fromdb(row) for row in rows]
+
+    
+

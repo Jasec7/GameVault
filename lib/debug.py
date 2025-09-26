@@ -11,6 +11,14 @@ Console.create_table()
 
 
 c1 = Console("PS5")
+c1.save()
 print(c1)
 
-c2 = Console("   ")  
+c1.name = "Play Station 5"
+c1.update()
+print(c1)
+
+c1.delete()
+print(c1)
+
+
