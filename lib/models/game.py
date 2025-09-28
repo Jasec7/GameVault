@@ -17,3 +17,14 @@ class Game:
             f"Console ID: {self.console_id}>"
         )
 
+    @property
+    def title(self):
+        return self._title
+    
+    @title.setter
+    def title(self, value):
+        if not isinstance(value, str):
+            raise ValueError("Title must be a string")
+        if len(value.strip()) <= 0:
+            raise ValueError("Title must be longer than 0")
+        self._title = value
