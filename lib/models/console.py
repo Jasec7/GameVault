@@ -108,7 +108,7 @@ class Console:
             SELECT *
             FROM consoles
         """
-        row = CURSOR.execute(sql).fetchall()
+        rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
 
     @classmethod

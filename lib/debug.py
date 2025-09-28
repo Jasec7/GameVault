@@ -21,4 +21,7 @@ print(c1)
 c1.delete()
 print(c1)
 
+print(Console.find_by_id(Ps5.id))
+print(Console.find_by_id(999))
+
 
