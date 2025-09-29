@@ -142,7 +142,18 @@ class Game:
 
         sql = """
             SELECT *
-            FROM consoles
+            FROM games
         """
         rows = CURSOR.execute(sql).fetchall()
         return [cls.instance_from_db(row) for row in rows]
+    
+    @classmethod
+    def find_by_id(cls,id):
+        """Return a Game object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT * 
+            FROM games
+            WHERE id = ?
+        """
+        row = CURSOR.execute(sql,(id,)).fetchone()
+        return cls.instance_from_db(row) if row else None

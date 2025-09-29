@@ -32,5 +32,18 @@ print(Console.find_by_id(c1.id))
 print(Console.get_all())
 
 g1 = Game("Metal Gear Solid", "action", c1.id)
+g2 = Game("Zelda", "adventure", c2.id)
+g3 = Game("Tetris", 22 , c1.id)
+g3.save()
+g2.save()
 g1.save()
 print(g1)
+print(g2)
+print(g3)
+
+#g2.delete()
+#print(g2)
+
+print(Game.find_by_id(g1.id))
+print(Game.find_by_id(22))
+print(Game.get_all())
