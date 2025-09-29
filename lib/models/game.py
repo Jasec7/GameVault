@@ -120,6 +120,13 @@ class Game:
         self.id = None
 
     @classmethod
+    def create(cls, name):
+        """Initialize a new Game instance and save it to the database."""
+        game = cls(name)
+        game.save()
+        return game
+
+    @classmethod
     def instance_from_db(cls, row):
         """Return a Game object having the attribute values from the table row"""
         if not row:
@@ -156,4 +163,15 @@ class Game:
             WHERE id = ?
         """
         row = CURSOR.execute(sql,(id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        """Return Game object corresponding to first table row matching specified name"""
+        sql = """
+            SELECT *
+            FROM games
+            WHERE name is ?       
+        """
+        row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
