@@ -3,6 +3,7 @@
 from models.__init__ import CONN, CURSOR
 from models.console import Console
 from models.game import Game
+from helpers import create_console
 #import ipdb
 
 
@@ -33,7 +34,7 @@ print(Console.get_all())
 
 g1 = Game("Metal Gear Solid", "action", c1.id)
 g2 = Game("Zelda", "adventure", c2.id)
-g3 = Game("Tetris", 22 , c1.id)
+g3 = Game("Tetris", "puzzle" , c1.id)
 g3.save()
 g2.save()
 g1.save()
@@ -47,3 +48,5 @@ print(g3)
 print(Game.find_by_id(g1.id))
 print(Game.find_by_id(22))
 print(Game.get_all())
+
+create_console()

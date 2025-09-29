@@ -86,6 +86,14 @@ class Console:
         self.id = None
 
     @classmethod
+    def create(cls, name):
+        """Initialize a new Console instance and save it to the database."""
+        console = cls(name)
+        console.save()
+        return console
+
+
+    @classmethod
     def instance_from_db(cls, row):
         """Return a Console object having the attribute values from the table row"""
         if not row:
