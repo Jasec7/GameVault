@@ -63,4 +63,5 @@ class Game:
         console_id INTEGER,
         FOREIGN KEY (console_id) REFERENCES consoles(id))
     """
-    
+    CURSOR.execute(sql)
+    CONN.commit()
