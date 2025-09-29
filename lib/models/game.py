@@ -1,6 +1,6 @@
 #lib/models/game.py
-from __init__ import CURSOR, CONN
-from console import Console
+from models.__init__ import CURSOR, CONN
+from models.console import Console
 
 class Game:
     all = {}
@@ -13,7 +13,7 @@ class Game:
 
     def __repr__(self):
         return(
-            f"<Game {self.id}: {self.title}, {self.genre}>"
+            f"<Game {self.id}: {self.title}, {self.genre}," +
             f"Console ID: {self.console_id}>"
         )
 
@@ -37,7 +37,7 @@ class Game:
     def genre(self, value):
         if not isinstance(value, str):
             raise ValueError("Genre must be a string")
-        if len(value.strip()) < 0:
+        if len(value.strip()) <= 0:
             raise ValueError("Genre must be longer than 0")
         self._genre = value
 
