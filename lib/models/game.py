@@ -98,7 +98,51 @@ class Game:
             SET title = ?, genre = ?, console_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.title, self.genre, self.console_id))
+        CURSOR.execute(sql, (self.title, self.genre, self.console_id, self.id))
         CONN.commit()
 
     
+    def delete(self):
+        """Delete the table row corresponding to the current Game instance,
+        delete the dictionary entry, and reassign id attribute"""
+
+        sql = """
+            DELETE FROM games
+            WHERE id = ?
+        """
+
+        if self.id is not None:
+            CURSOR.execute(sql, (self.id,))
+            CONN.commit()
+
+        if self.id in type(self).all:
+            del type(self).all[self.id]
+        self.id = None
+
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return a Game object having the attribute values from the table row"""
+        if not row:
+            return None
+
+        game = cls.all.get(row[0])
+        if game:
+            game.title = row[1]
+            game.genre = row[2]
+            game.console_id = row[3]
+        else:
+            game = cls(row[1], row[2], row[3])
+            game.id = row[0]
+            cls.all[game.id] = game
+        return game
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing a Game object per row in the table"""
+
+        sql = """
+            SELECT *
+            FROM consoles
+        """
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
