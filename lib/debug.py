@@ -18,10 +18,15 @@ c1.name = "Play Station 5"
 c1.update()
 print(c1)
 
-c1.delete()
-print(c1)
+c2 = Console("Nintendo switch")
+c2.save()
+print(c2)
 
-print(Console.find_by_id(Ps5.id))
-print(Console.find_by_id(999))
+#c1.delete()
+#print(c1)
+
+print(Console.find_by_id(c1.id))
+#print(Console.find_by_id(999))
+print(Console.get_all())
 
 
