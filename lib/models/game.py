@@ -50,4 +50,17 @@ class Game:
         if type(console_id) is int and Console.find_by_id(console_id):
             self._console_id = console_id
         else:
-            raise ValueError("console_ide must reference a console in the database")
+            raise ValueError("console_id must reference a console in the database")
+
+    @classmethod
+    def create_table(cls):
+        """Create a new table to persits the attributes of Game instances"""
+    sql = """
+        CREATE TABLE IF NOT EXISTS games (
+        id INTEGER PRIMARY KEY,
+        title TEXT,
+        genre TEXT,
+        console_id INTEGER,
+        FOREIGN KEY (console_id) REFERENCES consoles(id))
+    """
+    
