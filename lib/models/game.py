@@ -65,3 +65,12 @@ class Game:
     """
     CURSOR.execute(sql)
     CONN.commit()
+
+    @classmethod
+    def drop_table(cls):
+        """Drop the table that persist Game instances"""
+    sql = """
+        DROP TABLE IF EXISTS games;
+    """
+    CURSOR.execute(sql)
+    CONN.commit()
