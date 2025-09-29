@@ -54,38 +54,40 @@ class Game:
 
     @classmethod
     def create_table(cls):
-        """Create a new table to persits the attributes of Game instances"""
-    sql = """
+        """Create a new table to persist the attributes of Game instances"""
+        sql = """
         CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY,
         title TEXT,
         genre TEXT,
         console_id INTEGER,
         FOREIGN KEY (console_id) REFERENCES consoles(id))
-    """
-    CURSOR.execute(sql)
-    CONN.commit()
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
 
     @classmethod
     def drop_table(cls):
         """Drop the table that persist Game instances"""
-    sql = """
+        sql = """
         DROP TABLE IF EXISTS games;
-    """
-    CURSOR.execute(sql)
-    CONN.commit()
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
 
     def save(self):
         """ Insert a new row with the title, genre and console_id values of the current Game instance.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
 
-    sql = """
+        sql = """
             INSERT INTO games (title, genre, console_id)
             VALUES (?,?,?)
-    """
-    CURSOR.execute(sql,(self.title, self.genre, self.console_id))
-    CONN.commit()
+        """
+        CURSOR.execute(sql,(self.title, self.genre, self.console_id))
+        CONN.commit()
 
-    self.id = CURSOR.lastrowid
-    type(self).all[self.id] = self    
+        self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self    
+
+    def update(self):

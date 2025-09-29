@@ -2,12 +2,14 @@
 
 from models.__init__ import CONN, CURSOR
 from models.console import Console
-#from models.game import Game
+from models.game import Game
 #import ipdb
 
 
 Console.drop_table()
 Console.create_table()
+Game.drop_table()
+Game.create_table()
 
 
 c1 = Console("PS5")
@@ -29,4 +31,6 @@ print(Console.find_by_id(c1.id))
 #print(Console.find_by_id(999))
 print(Console.get_all())
 
-
+g1 = Game("Metal Gear Solid", "action", c1.id)
+g1.save()
+print(g1)
