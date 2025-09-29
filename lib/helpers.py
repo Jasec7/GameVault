@@ -62,3 +62,69 @@ def delete_console():
         print(f"Console {console.name} deleted")
     else:
         print(f"Console {id_} not found")
+
+    #----  GAMES ------
+def list_games():
+    games = Game.get_all()
+    for game in games:
+        print(f'{game.id}. {game.title}. {game.genre}')
+
+def find_game_by_id():
+    id_str = input("Enter the game's id: ").strip()
+    try:
+        id_ = int(id_str)   
+    except ValueError:
+        print("Error: id must be a number")
+        return
+
+    game = Game.find_by_id(id_)
+    print(game) if game else print(f'Game {id_} not found')
+
+def create_game():
+    title = input("Enter the game's title:").strip()
+    genre = input("Enter the game's genre: ")
+    console_id = input("Enter the console' s id: ")
+    try:
+        console_id = int(console_id)
+        game = Game.create(title, genre, console_id)
+        print(f"Success: {game.title} created")
+    except ValueError as exc:
+        print("Error creating game:", exc)
+
+def update_game():
+    id_str = input("Enter the game's id: ").strip()
+    try:
+        id_ = int(id_str)
+    except ValueError:
+        print("Error: id must be a number")
+        return
+    
+    if game := Game.find_by_id(id_):
+        try:
+            title = input("Enter the game's new title: ")
+            game.title = title
+            genre = input("Enter the game's new genre: ")
+            game.genre = genre
+            console_id = input("Enter the console's new id: ")
+            console_id = int(console_id)
+
+            game.update()
+            print(f'Success: {game}')
+        except ValueError as exc:
+            print("Error updating game: ", exc)
+    else:
+        print(f"Game {id_} not found")
+
+def delete_game():
+    id_str = input("Enter the game's id: ").strip()
+    try:
+        id_ = int(id_str)
+    except ValueError:
+        print("Error: id must be a number")
+        return
+
+    if game := Game.find_by_id(id_):
+        game.delete()
+        print(f"Game {game.title} deleted")
+    else:
+        print(f"Game {id_} not found")
