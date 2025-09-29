@@ -91,3 +91,14 @@ class Game:
         type(self).all[self.id] = self    
 
     def update(self):
+        """Update the table row corresponding to the current Game instance."""
+
+        sql = """
+            UPDATE games
+            SET title = ?, genre = ?, console_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.title, self.genre, self.console_id))
+        CONN.commit()
+
+    
