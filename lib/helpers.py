@@ -45,10 +45,10 @@ def update_console():
     
     if console := Console.find_by_id(id_):
         try:
-            name = input("Enter the console's new name: ")
+            name = input("Enter the console's new name: ").strip()
             console.name = name
             console.update()
-            print(f'Success: {console}')
+            print(f'Success: update to {console}')
         except ValueError as exc:
             print("Error updating console: ", exc)
     else:
@@ -68,11 +68,12 @@ def delete_console():
     else:
         print(f"Console {id_} not found")
 
-    #----  GAMES ------
+    
 def list_games():
     games = Game.get_all()
     for game in games:
-        print(f'{game.id}. {game.title}. {game.genre}')
+        console = Console.find_by_id(game.console_id)
+        print(f'{game.id}. {game.title} - ({game.genre}) on {console.name}')
 
 def find_game_by_name():
     name =input("Enter the game's name: ").strip()
@@ -91,9 +92,9 @@ def find_game_by_id():
     print(game) if game else print(f'Game {id_} not found')
 
 def create_game():
-    title = input("Enter the game's title:").strip()
-    genre = input("Enter the game's genre: ")
-    console_id = input("Enter the console' s id: ")
+    title = input("Enter the game's title:").strip().capitalize()
+    genre = input("Enter the game's genre: ").capitalize()
+    console_id = input("Enter the console's id: ")
     try:
         console_id = int(console_id)
         game = Game.create(title, genre, console_id)
@@ -111,15 +112,15 @@ def update_game():
     
     if game := Game.find_by_id(id_):
         try:
-            title = input("Enter the game's new title: ")
+            title = input("Enter the game's new title: ").capitalize()
             game.title = title
-            genre = input("Enter the game's new genre: ")
+            genre = input("Enter the game's new genre: ").capitalize()
             game.genre = genre
             console_id = input("Enter the console's new id: ")
-            console_id = int(console_id)
+            game.console_id = int(console_id)
 
             game.update()
-            print(f'Success: {game}')
+            print(f'Success: updated to {game}')
         except ValueError as exc:
             print("Error updating game: ", exc)
     else:
