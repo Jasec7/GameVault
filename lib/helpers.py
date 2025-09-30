@@ -14,7 +14,7 @@ def list_consoles():
 def find_console_by_name():
     name =input("Enter the console's name: ").strip()
     console = Console.find_by_name(name)
-    print(console) if console else print(f"Console {name} not found")
+    print(console) if console else print(f"No console {name} was found. Please check the name and try again")
 
 def find_console_by_id():
     id_str = input("Enter the console's id: ").strip()
@@ -77,7 +77,7 @@ def list_games():
 def find_game_by_name():
     name =input("Enter the game's name: ").strip()
     game = Game.find_by_name(name)
-    print(game) if game else print(f"Game {name} not found")
+    print(game) if game else print(f"No game {name} was found. Please check the name and try again")
 
 def find_game_by_id():
     id_str = input("Enter the game's id: ").strip()
