@@ -11,10 +11,15 @@ def list_consoles():
     for console in consoles:
         print(f'{console.id}. {console.name}')
 
+def find_console_by_name():
+    name =input("Enter the console's name: ")
+    console = Console.find_by_name(name)
+    print(console) if console else print(f"Console {name} not found")
+
 def find_console_by_id():
     id_str = input("Enter the console's id: ").strip()
     try:
-        id_ = int(id_str)   # convert to int
+        id_ = int(id_str)   
     except ValueError:
         print("Error: id must be a number")
         return
