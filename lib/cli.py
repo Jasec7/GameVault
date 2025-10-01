@@ -29,6 +29,9 @@ def main():
             consoles_menu()
         elif choice == "2":
             games_menu()
+        else: 
+             print("Invalid choice, please try again.")
+
 
 
 def consoles_menu():
@@ -59,5 +62,35 @@ def consoles_menu():
             delete_console()
         else:
             print("Invalid choice, please try again.")
+
+def games_menu():
+    while True:
+        print("---- Games Menu ----")
+        print("1. List all games")
+        print("2. Find game by name")
+        print("3. Find game by id")
+        print("4. Create game")
+        print("5. Update game")
+        print("6. Delete game")
+        print("0. Back to main menu")
+
+        choice = input("> ").strip()
+        if choice == "0":
+            break
+        elif choice == "1":
+            list_games()
+        elif choice == "2": 
+            find_game_by_name()
+        elif choice == "3": 
+            find_game_by_id()
+        elif choice == "4": 
+            create_game()
+        elif choice == "5": 
+            update_game()
+        elif choice == "6": 
+            delete_game()
+        else:
+            print("Invalid choice, please try again.")
+
 if __name__ == "__main__":
     main()

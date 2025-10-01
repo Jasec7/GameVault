@@ -120,9 +120,9 @@ class Game:
         self.id = None
 
     @classmethod
-    def create(cls, name):
+    def create(cls, title, genre, console_id):
         """Initialize a new Game instance and save it to the database."""
-        game = cls(name)
+        game = cls(title, genre, console_id)
         game.save()
         return game
 
