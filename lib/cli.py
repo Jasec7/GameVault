@@ -17,7 +17,7 @@ from helpers import (
 
 def main():
     while True:
-        print("---- Main Menu ----")
+        print("*** Main Menu ***")
         print("1. Consoles")
         print("2. Games")
         print("0. Exit")
@@ -36,7 +36,7 @@ def main():
 
 def consoles_menu():
     while True:
-        print("---- Consoles Menu ----")
+        print("*** Consoles Menu ***")
         print("1. List all consoles")
         print("2. Find console by name")
         print("3. Find console by id")
@@ -65,7 +65,7 @@ def consoles_menu():
 
 def games_menu():
     while True:
-        print("---- Games Menu ----")
+        print("*** Games Menu ***")
         print("1. List all games")
         print("2. Find game by name")
         print("3. Find game by id")

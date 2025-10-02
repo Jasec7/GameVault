@@ -1,9 +1,11 @@
 from models.console import Console
 from models.game import Game
+from colorama import Fore, Style, init
+init(autoreset=True)
 
 
 def exit_program():
-    print("Goodbye!")
+    print("Goodbye Gamer!")
     exit()
 
 def list_consoles():
@@ -28,10 +30,10 @@ def find_console_by_id():
     print(console) if console else print(f'Console {id_} not found')
 
 def create_console():
-    name = input("Enter the console's name:").strip()
+    name = input("Enter the console's name:").strip().title()
     try:
         console = Console.create(name)
-        print(f"Success: {console.name} created")
+        print(Fore.GREEN + f"Success: {console.name} created")
     except ValueError as exc:
         print("Error creating console:", exc)
 
@@ -76,9 +78,9 @@ def list_games():
         print(f'{game.id}. {game.title} - ({game.genre}) on {console.name}')
 
 def find_game_by_name():
-    name =input("Enter the game's name: ").strip()
-    game = Game.find_by_name(name)
-    print(game) if game else print(f"No game {name} was found. Please check the name and try again")
+    title =input("Enter the game's name: ").strip().title()
+    game = Game.find_by_name(title)
+    print(game) if game else print(f"No game {title} was found. Please check the name and try again")
 
 def find_game_by_id():
     id_str = input("Enter the game's id: ").strip()
@@ -92,13 +94,13 @@ def find_game_by_id():
     print(game) if game else print(f'Game {id_} not found')
 
 def create_game():
-    title = input("Enter the game's title:").strip().capitalize()
-    genre = input("Enter the game's genre: ").capitalize()
+    title = input("Enter the game's title:").strip().title()
+    genre = input("Enter the game's genre: ").strip().title()
     console_id = input("Enter the console's id: ")
     try:
         console_id = int(console_id)
         game = Game.create(title, genre, console_id)
-        print(f"Success: {game.title} created")
+        print(Fore.GREEN + f"Success: {game.title} created")
     except ValueError as exc:
         print("Error creating game:", exc)
 
@@ -112,9 +114,9 @@ def update_game():
     
     if game := Game.find_by_id(id_):
         try:
-            title = input("Enter the game's new title: ").capitalize()
+            title = input("Enter the game's new title: ").title()
             game.title = title
-            genre = input("Enter the game's new genre: ").capitalize()
+            genre = input("Enter the game's new genre: ").title()
             game.genre = genre
             console_id = input("Enter the console's new id: ")
             game.console_id = int(console_id)
