@@ -5,13 +5,18 @@ init(autoreset=True)
 
 
 def exit_program():
-    print("Goodbye Gamer!")
+    print(Fore.GREEN +"Goodbye Gamer!")
     exit()
+
 
 def list_consoles():
     consoles = Console.get_all()
-    for console in consoles:
-        print(f'{console.id}. {console.name}')
+    if not consoles:
+        print("No consoles yet. Try adding one!")
+    else:
+        for console in consoles:
+            print(f'{console.id}. {console.name}')
+    return consoles
 
 def find_console_by_name():
     name =input("Enter the console's name: ").strip()
