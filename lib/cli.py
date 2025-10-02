@@ -1,3 +1,6 @@
+from colorama import Fore, Style, init
+init(autoreset=True)
+
 from helpers import (
     exit_program,
     list_consoles,
@@ -17,10 +20,11 @@ from helpers import (
 
 def main():
     while True:
-        print("*** Main Menu ***")
-        print("1. Consoles")
-        print("2. Games")
-        print("0. Exit")
+        print(Fore.GREEN + "Welcome to GameVault!")
+        print(Fore.CYAN + "*** Main Menu ***")
+        print(Fore.YELLOW +"1. Consoles")
+        print(Fore.YELLOW +"2. Games")
+        print(Fore.YELLOW +"0. Exit")
 
         choice = input("> ")
         if choice == "0":
@@ -30,20 +34,20 @@ def main():
         elif choice == "2":
             games_menu()
         else: 
-             print("Invalid choice, please try again.")
+             print(Fore.RED +"Invalid choice, please try again.")
 
 
 
 def consoles_menu():
     while True:
-        print("*** Consoles Menu ***")
-        print("1. List all consoles")
-        print("2. Find console by name")
-        print("3. Find console by id")
-        print("4. Create console")
-        print("5. Update console")
-        print("6. Delete console")
-        print("0. Back to main menu")
+        print(Fore.CYAN + "*** Consoles Menu ***")
+        print(Fore.YELLOW +"1. List all consoles")
+        print(Fore.YELLOW +"2. Find console by name")
+        print(Fore.YELLOW +"3. Find console by id")
+        print(Fore.YELLOW +"4. Create console")
+        print(Fore.YELLOW +"5. Update console")
+        print(Fore.YELLOW +"6. Delete console")
+        print(Fore.YELLOW +"0. Back to main menu")
 
         choice = input("> ").strip()
         if choice == "0":
@@ -61,18 +65,18 @@ def consoles_menu():
         elif choice == "6": 
             delete_console()
         else:
-            print("Invalid choice, please try again.")
+            print(Fore.RED +"Invalid choice, please try again.")
 
 def games_menu():
     while True:
-        print("*** Games Menu ***")
-        print("1. List all games")
-        print("2. Find game by name")
-        print("3. Find game by id")
-        print("4. Create game")
-        print("5. Update game")
-        print("6. Delete game")
-        print("0. Back to main menu")
+        print(Fore.CYAN + "*** Games Menu ***")
+        print(Fore.YELLOW +"1. List all games")
+        print(Fore.YELLOW +"2. Find game by name")
+        print(Fore.YELLOW +"3. Find game by id")
+        print(Fore.YELLOW +"4. Create game")
+        print(Fore.YELLOW +"5. Update game")
+        print(Fore.YELLOW +"6. Delete game")
+        print(Fore.YELLOW +"0. Back to main menu")
 
         choice = input("> ").strip()
         if choice == "0":
@@ -90,7 +94,7 @@ def games_menu():
         elif choice == "6": 
             delete_game()
         else:
-            print("Invalid choice, please try again.")
+            print(Fore.RED +"Invalid choice, please try again.")
 
 if __name__ == "__main__":
     main()
