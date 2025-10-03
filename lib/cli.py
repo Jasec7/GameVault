@@ -1,4 +1,6 @@
 from colorama import Fore, Style, init
+from models.console import Console
+from models.game import Game
 init(autoreset=True)
 
 from helpers import (
@@ -39,6 +41,7 @@ def main():
 
 
 def consoles_menu():
+
     while True:
         print(Fore.CYAN + "*** Consoles Menu ***")
         print(Fore.YELLOW +"1. List all consoles")
@@ -66,21 +69,39 @@ def consoles_menu():
 
 def consoles_screen_menu():
     while True:
-        list_consoles()
+        consoles = Console.get_all()
+
+        if not consoles:
+            print("No consoles yet. Press N to create one or B to go back")
+        else:
+            for i, console in enumerate(consoles, start = 1):
+                print(f'{i}. {console.name}')
+
 
         print(Fore.CYAN + "*** Console List Screen ***")
-        print(Fore.YELLOW +"N. Add new console")
-        print(Fore.YELLOW +"B. Back to Consoles Menu")
-
+        print(Fore.YELLOW +"N. Add new console U <#> Update a console B. Back to Consoles Menu")
+       
         choice = input("> ").strip().lower()
         if choice == "b":
            break
         elif choice == "n":
-            create_console() 
-        elif choice == "u":
-            update_console() 
+            create_console()
+            
         else:
-            print(Fore.RED +"Invalid choice, please try again.")
+            parts = choice.split()
+        
+            if parts[0] == "u" and len(parts) > 1:
+                try:
+                    idx = int(parts[1])
+                    selected_console = consoles[idx - 1]
+                    print(f"You selected {selected_console.name} to update")
+            
+                except (ValueError, IndexError):
+                    print(Fore.RED + "Invalid number. Try again.")
+            elif parts[0] == "b":
+                break
+            else:
+                print(Fore.RED + "Invalid choice, please try again.")
 
 
 def games_menu():
