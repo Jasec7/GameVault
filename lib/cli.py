@@ -72,7 +72,8 @@ def consoles_screen_menu():
 
         print(Fore.CYAN + "*** Console List Screen ***")
         print(Fore.YELLOW +"Select a letter from the following options:")
-        print(Fore.YELLOW +"A. Add new console U <#>. Update a console B. Back to Consoles Menu")
+        
+        print(Fore.YELLOW +"A. Add new console U. Update a console B. Back to Consoles Menu")
        
         choice = input("> ").strip().lower()
         if choice == "b":
@@ -87,9 +88,8 @@ def consoles_screen_menu():
                 try:
                     idx = int(parts[1])
                     selected_console = consoles[idx - 1]
-                    #print(f"You selected {selected_console.name} to update")
-                    #print(f"Updating: {selected_console.name} (id {selected_console.id})")
-                    update_console()
+                    print(f"You selected {selected_console.name} to update")
+                    update_console(selected_console)
             
                 except (ValueError, IndexError):
                     print(Fore.RED + "Invalid number. Try again.")

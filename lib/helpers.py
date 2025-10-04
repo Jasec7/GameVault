@@ -42,24 +42,12 @@ def create_console():
     except ValueError as exc:
         print(Fore.RED +"Error creating console:", exc)
 
-def update_console():
-    id_str = input("Enter the console's id: ").strip()
-    try:
-        id_ = int(id_str)
-    except ValueError:
-        print("Error: id must be a number")
-        return
-    
-    if console := Console.find_by_id(id_):
-        try:
-            name = input("Enter the console's new name: ").strip()
-            console.name = name
-            console.update()
-            print(f'Success: update to {console}')
-        except ValueError as exc:
-            print(Fore.RED +"Error updating console: ", exc)
-    else:
-        print(f'Console "{id_}" not found')
+def update_console(console):
+    new_name = input(f"Enter the console's new name [{console.name}]: ").strip()
+    if new_name:
+        console.name = new_name
+        console.update()
+    print(Fore.YELLOW +f"Success: updated to {console.name}")
 
 def delete_console():
     id_str = input("Enter the console's id: ").strip()
@@ -109,29 +97,17 @@ def create_game():
     except ValueError as exc:
         print(Fore.RED +"Error creating game:", exc)
 
-def update_game():
-    id_str = input("Enter the game's id: ").strip()
-    try:
-        id_ = int(id_str)
-    except ValueError:
-        print(Fore.RED +"Error: id must be a number")
-        return
-    
-    if game := Game.find_by_id(id_):
-        try:
-            title = input("Enter the game's new title: ").title()
-            game.title = title
-            genre = input("Enter the game's new genre: ").capitalize()
-            game.genre = genre
-            console_id = input("Enter the console's new id: ")
-            game.console_id = int(console_id)
+def update_game(game):
+    new_title = input(Fore.YELLOW +f"Enter new title [{game.title}]: ").strip()
+    if new_title:
+        game.title = new_title
 
-            game.update()
-            print(f'Success: updated to {game}')
-        except ValueError as exc:
-            print(Fore.RED +"Error updating game: ", exc)
-    else:
-        print(f'Game "{id_}" not found')
+    new_genre = input(Fore.YELLOW +f"Enter new genre [{game.genre}]: ")
+    if new_genre:
+        game.genre = new_genre
+
+    game.update()
+    print(Fore.YELLOW +f"Success: updated to {game.title}")
 
 def delete_game():
     id_str = input("Enter the game's id: ").strip()
