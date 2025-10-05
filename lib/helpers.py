@@ -89,14 +89,28 @@ def find_game_by_id():
 def create_game():
     title = input("Enter the game's title:").strip().title()
     genre = input("Enter the game's genre: ").strip().capitalize()
-    console_id = input("Enter the console's id: ")
-    try:
-        console_id = int(console_id)
-        game = Game.create(title, genre, console_id)
-        print(Fore.GREEN + f"Success: {game.title} created")
-    except ValueError as exc:
-        print(Fore.RED +"Error creating game:", exc)
+    
+    consoles = Console.get_all()
+    if not consoles:
+        print(Fore.RED + f'No consoles available. Create one first')
+        return
+    
+    print("Select a console for this game:")
+    for i, console in enumerate(consoles, start=1):
+        print(f"{i}. {console.name}")
 
+    choice = input("> ").strip()
+    try:
+        idx = int(choice)
+        selected_console = consoles[idx - 1]
+    except (ValueError, IndexError):
+        print(Fore.RED + "Invalid selection. Game not created.")
+        return
+    
+    game = Game.create(title, genre, selected_console.id)
+    print(Fore.GREEN + f"Success: {game.title} <{game.genre}> on {selected_console.name}")
+    
+    
 def update_game(game):
     new_title = input(Fore.YELLOW +f"Enter new title [{game.title}]: ").strip()
     if new_title:
