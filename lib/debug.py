@@ -46,7 +46,7 @@ g1.save()
 #print(g2)
 #print(g3)
 
-#g2.delete()
+g2.delete()
 #print(g2)
 
 print(Game.find_by_id(g1.id))

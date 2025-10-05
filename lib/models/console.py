@@ -29,7 +29,8 @@ class Console:
         sql = """
             CREATE TABLE IF NOT EXISTS consoles (
             id INTEGER PRIMARY KEY,
-            name TEXT)
+            name TEXT  UNIQUE NOT NULL
+            );
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -136,7 +137,7 @@ class Console:
         sql = """
             SELECT *
             FROM consoles
-            WHERE name is = ?       
+            WHERE LOWER(name) = LOWER(?)       
         """
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None

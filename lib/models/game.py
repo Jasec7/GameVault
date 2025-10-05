@@ -58,10 +58,11 @@ class Game:
         sql = """
         CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY,
-        title TEXT,
-        genre TEXT,
-        console_id INTEGER,
-        FOREIGN KEY (console_id) REFERENCES consoles(id))
+        title TEXT NOT NULL,
+        genre TEXT NOT NULL,
+        console_id INTEGER NOT NULL,
+        FOREIGN KEY (console_id) REFERENCES consoles(id) ON DELETE CASCADE
+        );
         """
         CURSOR.execute(sql)
         CONN.commit()
@@ -171,7 +172,7 @@ class Game:
         sql = """
             SELECT *
             FROM games
-            WHERE title is = ?       
+            WHERE LOWER(title) = LOWER(?)       
         """
         row = CURSOR.execute(sql, (title,)).fetchone()
         return cls.instance_from_db(row) if row else None
