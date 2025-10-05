@@ -66,9 +66,13 @@ def delete_console():
     
 def list_games():
     games = Game.get_all()
-    for game in games:
-        console = Console.find_by_id(game.console_id)
-        print(f'{game.id}. {game.title} - ({game.genre}) on {console.name}')
+    if not games:
+        print("No games yet. Press 'A' in the menu to add your first game!")
+    else:
+        for i, game in enumerate(games, start=1):
+            console = Console.find_by_id(game.console_id)
+            console_name = console.name if console else "(Unknown Console)"
+            print(f'{i}. {game.title} - ({game.genre}) on {console_name}')
 
 def find_game_by_name():
     title =input("Enter the game's name: ").strip().title()
@@ -87,8 +91,8 @@ def find_game_by_id():
     print(game) if game else print(f'Game "{id_}" not found')
 
 def create_game():
-    title = input("Enter the game's title:").strip().title()
-    genre = input("Enter the game's genre: ").strip().capitalize()
+    title = input(Fore.LIGHTMAGENTA_EX +"Enter the game's title:").strip().title()
+    genre = input(Fore.LIGHTMAGENTA_EX +"Enter the game's genre: ").strip().capitalize()
     
     consoles = Console.get_all()
     if not consoles:
@@ -97,7 +101,7 @@ def create_game():
     
     print("Select a console for this game:")
     for i, console in enumerate(consoles, start=1):
-        print(f"{i}. {console.name}")
+        print(Fore.YELLOW + f"{i}. {console.name}")
 
     choice = input("> ").strip()
     try:
