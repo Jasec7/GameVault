@@ -14,12 +14,12 @@ def list_consoles():
     if not consoles:
         print("No consoles yet. Try adding one!")
     else:
-        for console in consoles:
-            print(f'{console.id}. {console.name}')
+        for i, console in enumerate(consoles, start = 1):
+            print(f'{i}. {console.name}')
     return consoles
 
 def find_console_by_name():
-    name =input("Enter the console's name: ").strip()
+    name =input("Enter the console's name: ").strip().title()
     console = Console.find_by_name(name)
     print(console) if console else print(Fore.RED +f'No console "{name}" was found. Please check the name and try again')
 
@@ -100,6 +100,7 @@ def create_game():
         return
     
     print("Select a console for this game:")
+    print()
     for i, console in enumerate(consoles, start=1):
         print(Fore.YELLOW + f"{i}. {console.name}")
 

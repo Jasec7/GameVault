@@ -13,7 +13,7 @@ class Game:
 
     def __repr__(self):
         return(
-            f"<Game {self.id}: {self.title}, {self.genre}," +
+            f"<Game {self.id}: {self.title}, {self.genre}, " +
             f"Console ID: {self.console_id}>"
         )
 
@@ -54,7 +54,7 @@ class Game:
 
     @classmethod
     def create_table(cls):
-        """Create a new table to persist the attributes of Game instances"""
+        """Create a new table to persists the attributes of Game instances"""
         sql = """
         CREATE TABLE IF NOT EXISTS games (
         id INTEGER PRIMARY KEY,
@@ -68,7 +68,7 @@ class Game:
 
     @classmethod
     def drop_table(cls):
-        """Drop the table that persist Game instances"""
+        """Drop the table that persists Game instances"""
         sql = """
         DROP TABLE IF EXISTS games;
         """
@@ -171,7 +171,7 @@ class Game:
         sql = """
             SELECT *
             FROM games
-            WHERE title is ?       
+            WHERE title is = ?       
         """
         row = CURSOR.execute(sql, (title,)).fetchone()
         return cls.instance_from_db(row) if row else None

@@ -7,13 +7,11 @@ from helpers import (
     exit_program,
     list_consoles,
     find_console_by_name,
-    find_console_by_id,
     create_console,
     update_console,
     delete_console,
     list_games,
     find_game_by_name,
-    find_game_by_id,
     create_game,
     update_game,
     delete_game
@@ -23,11 +21,14 @@ from helpers import (
 def main():
     while True:
         print(Fore.GREEN + "Welcome to GameVault!")
+        print()
         print(Fore.CYAN + "*** Main Menu ***")
+        print()
         print(Fore.YELLOW +"Type the letter from the following options:")
         print(Fore.YELLOW +"C. Consoles")
         print(Fore.YELLOW +"G. Games")
         print(Fore.YELLOW +"E. Exit")
+        print()
 
         choice = input("> ").strip().lower()
         if choice == "e":
@@ -45,10 +46,12 @@ def consoles_menu():
 
     while True:
         print(Fore.CYAN + "*** Consoles Menu ***")
+        print()
         print(Fore.YELLOW + f'Press the option number:')
         print(Fore.YELLOW +"1. List all consoles")
         print(Fore.YELLOW +"2. Find console by name")
         print(Fore.YELLOW +"0. Back to main menu")
+        print()
 
         choice = input("> ").strip()
         if choice == "0":
@@ -70,11 +73,12 @@ def consoles_screen_menu():
             for i, console in enumerate(consoles, start = 1):
                 print(Fore.YELLOW +f'{i}. {console.name}')
 
-
+        print()
         print(Fore.CYAN + "*** Console List Screen ***")
+        print()
         print(Fore.YELLOW +"Select a letter from the following options:")
-        print(Fore.YELLOW +"A.Add new console U.Update a console D <#>.Delete a console V <#>.View games for a console B.Back to Consoles Menu")
-       
+        print(Fore.YELLOW +"A.Add a console U<#>.Update a console D<#>.Delete a console V <#>.View games for a console B.Back to Menu")
+        print()
         choice = input("> ").strip().lower()
         if choice == "b":
            break
@@ -97,10 +101,12 @@ def consoles_screen_menu():
                 try:
                     idx = int(parts[1])
                     selected_console = consoles[idx - 1]
-                    confirm = input(Fore.LIGHTMAGENTA_EX +f"Are you sure you want to delete '{selected_console.name}'? (y/n): ").strip().lower()
+                    print(Fore.LIGHTMAGENTA_EX +f"Are you sure you want to delete '{selected_console.name}'? (y/n): ")
+                    confirm = input().strip().lower()
                     if confirm == "y":
                         selected_console.delete()
-                        print(Fore.GREEN + f"'{selected_console.name}' deleted successfully.")
+                        print(Fore.GREEN + f"'{selected_console.name}' deleted successfully."+ Style.RESET_ALL)
+                        input()
                     else:
                         print("Deletion canceled.")
                 except (ValueError, IndexError):
@@ -114,11 +120,12 @@ def consoles_screen_menu():
                     console_games = [g for g in games if g.console_id == selected_console.id]
 
                     print(Fore.CYAN + f"*** Games for {selected_console.name} ***")
+                    print()
                     if not console_games:
                         print(Fore.YELLOW + "No games found for this console.")
                     else:
                         for i, game in enumerate(console_games, start=1):
-                            print(Fore.YELLOW +f"{i}. {game.title} ({game.genre})" +Style.RESET_ALL)
+                            print(Fore.YELLOW +f"{i}. {game.title} <{game.genre}>" +Style.RESET_ALL)
 
                     print(Fore.LIGHTMAGENTA_EX+ "Press Enter to return to the Consoles list..."+ Style.RESET_ALL)
                     input()
@@ -135,10 +142,12 @@ def consoles_screen_menu():
 def games_menu():
     while True:
         print(Fore.CYAN + "*** Games Menu ***")
+        print()
         print(Fore.YELLOW + f'Press the number option:')
         print(Fore.YELLOW +"1. List all games")
         print(Fore.YELLOW +"2. Find game by name")
         print(Fore.YELLOW +"0. Back to main menu")
+        print()
 
         choice = input("> ").strip()
         if choice == "0":
@@ -161,10 +170,13 @@ def games_screen_menu():
                 console = Console.find_by_id(game.console_id)
                 console_name = console.name if console else "(Unknown Console)"
                 print(Fore.YELLOW + f'{i}. {game.title} <{game.genre}> on {console_name}')
-    
+
+        print()
         print(Fore.CYAN + "*** Game List Screen ***")
+        print()
         print(Fore.YELLOW +"Press a letter from the following options:")
-        print(Fore.YELLOW +"A.Add new game U <#>.Update a game D <#>.Delete a game B.Back to Games Menu")
+        print(Fore.YELLOW +"A.Add a game U <#>.Update a game D <#>.Delete a game B.Back to Menu")
+        print()
        
         choice = input("> ").strip().lower()
         if choice == "b":
