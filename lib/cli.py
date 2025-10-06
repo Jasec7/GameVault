@@ -178,7 +178,7 @@ def games_screen_menu():
         print(Fore.CYAN + "*** Game List Screen ***")
         print()
         print(Fore.YELLOW +"Press a letter from the following options:")
-        print(Fore.YELLOW +"A.Add a game U <#>.Update a game V<#>. View consoles D <#>.Delete a game B.Back to Menu")
+        print(Fore.YELLOW +"A.Add a game U <#>.Update a game V <#>. View consoles D <#>.Delete a game B.Back to Menu")
         print()
        
         choice = input("> ").strip().lower()

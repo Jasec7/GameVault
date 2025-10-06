@@ -51,31 +51,36 @@ Relationship:
 
 ## CLI Navigation
 Main Menu
+
 C. Consoles
 G. Games
 E. Exit
 
 Consoles Menu
+
 List consoles
 Find console by name
 A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>. View games -- B.Back to menu
 
 Games Menu
+
 List games
 Find game by name
 A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>. View games -- B.Back to menu
 
-## Example interaction
+## Example Interaction
 ```
 Welcome to GameVault!
 
 *** Main Menu ***
+
 C. Consoles
 G. Games
 E. Exit
 > c
 
 *** Consoles Menu ***
+
 1. List all consoles
 2. Find console by name
 0. Back to main menu
@@ -84,6 +89,7 @@ E. Exit
 *** Console List Screen ***
 1. PS5
 2. Nintendo Switch
+
 A. Add a console  U <#>. Update a console  D <#>. Delete a console  V <#>. View games  B. Back to menu
 ```
 
