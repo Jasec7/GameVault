@@ -50,19 +50,19 @@ Relationship:
 - One Console → Many Games
 
 ## CLI Navigation
-Main Menu
+### Main Menu
 
 C. Consoles
 G. Games
 E. Exit
 
-Consoles Menu
+### Consoles Menu
 
 List consoles
 Find console by name
 A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>. View games -- B.Back to menu
 
-Games Menu
+### Games Menu
 
 List games
 Find game by name
