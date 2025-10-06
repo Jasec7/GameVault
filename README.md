@@ -1,4 +1,4 @@
-# 🕹️Game VAULT.
+# 🕹️Game Vault.
 It's a command line application where you can manage you video game collection by consoles and genres.
 
 ## Overview
