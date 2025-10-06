@@ -14,7 +14,7 @@ Users can add, update, view, or delete consoles and games, and easily view games
 - Clean CLI menus for presentative navigation
 
 ## Technologies Used
-- Python 3
+- Python 3.8
 - SQLite3 (with foreign key support)
 - Colorama (for colored CLI output)
 
