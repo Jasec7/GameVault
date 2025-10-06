@@ -67,7 +67,7 @@ A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>
 
 List games
 Find game by name
-A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>. View games -- B.Back to menu
+A. Add a console -- U <#>. Update a console -- D. <#> Delete a consoles -- V <#>. View consoles -- B.Back to menu
 ```
 ## Example Interaction
 ```
