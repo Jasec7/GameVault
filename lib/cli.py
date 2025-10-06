@@ -106,6 +106,8 @@ def consoles_screen_menu():
                     if confirm == "y":
                         selected_console.delete()
                         print(Fore.GREEN + f"'{selected_console.name}' deleted successfully."+ Style.RESET_ALL)
+                        print()
+                        print(Fore.LIGHTMAGENTA_EX+ "Press Enter to return to the Consoles list..."+ Style.RESET_ALL)
                         input()
                     else:
                         print("Deletion canceled.")
@@ -169,13 +171,14 @@ def games_screen_menu():
             for i, game in enumerate(games, start = 1):
                 console = Console.find_by_id(game.console_id)
                 console_name = console.name if console else "(Unknown Console)"
+                print()
                 print(Fore.YELLOW + f'{i}. {game.title} <{game.genre}> on {console_name}')
 
         print()
         print(Fore.CYAN + "*** Game List Screen ***")
         print()
         print(Fore.YELLOW +"Press a letter from the following options:")
-        print(Fore.YELLOW +"A.Add a game U <#>.Update a game D <#>.Delete a game B.Back to Menu")
+        print(Fore.YELLOW +"A.Add a game U <#>.Update a game V<#>. View consoles D <#>.Delete a game B.Back to Menu")
         print()
        
         choice = input("> ").strip().lower()
@@ -191,10 +194,26 @@ def games_screen_menu():
                 try:
                     idx = int(parts[1])
                     selected_game = games[idx - 1]
-                    print(f"You selected {selected_game.title} to update")
+                    print(Fore.LIGHTMAGENTA_EX +f"You selected {selected_game.title} to update")
                     update_game(selected_game)
                 except (ValueError, IndexError):
                     print(Fore.RED + "Invalid number. Try again.")
+
+            elif parts[0] == "v" and len(parts) > 1:
+                try:
+                    idx = int(parts[1])
+                    selected_game = games[idx - 1]
+                    console = Console.find_by_id(selected_game.console_id)
+                    if console:
+                        print(Fore.CYAN + f"*** Console for {selected_game.title} ***")
+                        print(Fore.YELLOW + f"<{console.name}>")
+                        print()
+                    else:
+                        print(Fore.RED + "Console not found.")
+                        input(Fore.LIGHTMAGENTA_EX + "Press Enter to return to the Games list..." + Style.RESET_ALL)
+                except (ValueError, IndexError):
+                        print(Fore.RED + "Invalid number. Try again.")
+            
 
             elif parts[0] == "d" and len(parts) > 1:
                 try:
@@ -204,6 +223,9 @@ def games_screen_menu():
                     if confirm == "y":
                         selected_game.delete()
                         print(Fore.GREEN + f"'{selected_game.title}' deleted successfully.")
+                        print()
+                        print(Fore.LIGHTMAGENTA_EX+ "Press Enter to return to the Games list..."+ Style.RESET_ALL)
+                        input()
                     else:
                         print("Deletion canceled.")
                 except (ValueError, IndexError):

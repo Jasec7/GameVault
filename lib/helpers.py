@@ -19,9 +19,13 @@ def list_consoles():
     return consoles
 
 def find_console_by_name():
-    name =input("Enter the console's name: ").strip().title()
+    name =input(Fore.LIGHTMAGENTA_EX +"Enter the console's name: ").strip().title()
     console = Console.find_by_name(name)
-    print(console) if console else print(Fore.RED +f'No console "{name}" was found. Please check the name and try again')
+    if console:
+        print(Fore.YELLOW +f'{console.name}')
+        print()
+    else:
+         print(Fore.RED + f'No console "{name}" was found. Please check the name and try again')
 
 def find_console_by_id():
     id_str = input("Enter the console's id: ").strip()
@@ -35,7 +39,7 @@ def find_console_by_id():
     print(console) if console else print(f'Console {id_} not found')
 
 def create_console():
-    name = input("Enter the console's name:").strip().title()
+    name = input(Fore.LIGHTMAGENTA_EX +"Enter the console's name:").strip().title()
     try:
         console = Console.create(name)
         print(Fore.GREEN + f"Success: {console.name} created")
@@ -43,11 +47,11 @@ def create_console():
         print(Fore.RED +"Error creating console:", exc)
 
 def update_console(console):
-    new_name = input(f"Enter the console's new name [{console.name}]: ").strip()
+    new_name = input(Fore.LIGHTMAGENTA_EX +f"Enter the console's new name [{console.name}]: ").strip()
     if new_name:
         console.name = new_name
         console.update()
-    print(Fore.YELLOW +f"Success: updated to {console.name}")
+    print(Fore.GREEN +f"Success: updated to {console.name}")
 
 def delete_console():
     id_str = input("Enter the console's id: ").strip()
@@ -75,9 +79,16 @@ def list_games():
             print(f'{i}. {game.title} - ({game.genre}) on {console_name}')
 
 def find_game_by_name():
-    title =input("Enter the game's name: ").strip().title()
+    title =input(Fore.LIGHTMAGENTA_EX +"Enter the game's name: ").strip().title()
     game = Game.find_by_name(title)
-    print(game) if game else print(Fore.RED +f'No game "{title}" was found. Please check the name and try again')
+    if game:
+        console = Console.find_by_id(game.console_id)
+        console_name = console.name if console else "(Unknown Console)"
+        print(Fore.YELLOW +f'{game.title} - ({game.genre}) on {console_name}')
+        print()
+    else:
+         print(Fore.RED + f'No game "{title}" was found. Please check the name and try again')
+
 
 def find_game_by_id():
     id_str = input("Enter the game's id: ").strip()
@@ -117,16 +128,16 @@ def create_game():
     
     
 def update_game(game):
-    new_title = input(Fore.YELLOW +f"Enter new title [{game.title}]: ").strip()
+    new_title = input(Fore.LIGHTMAGENTA_EX +f"Enter new title [{game.title}]: ").strip()
     if new_title:
         game.title = new_title
 
-    new_genre = input(Fore.YELLOW +f"Enter new genre [{game.genre}]: ")
+    new_genre = input(Fore.LIGHTMAGENTA_EX +f"Enter new genre [{game.genre}]: ")
     if new_genre:
         game.genre = new_genre
 
     game.update()
-    print(Fore.YELLOW +f"Success: updated to {game.title}")
+    print(Fore.GRENN +f"Success: updated to {game.title}")
 
 def delete_game():
     id_str = input("Enter the game's id: ").strip()
