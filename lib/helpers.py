@@ -27,16 +27,6 @@ def find_console_by_name():
     else:
          print(Fore.RED + f'No console "{name}" was found. Please check the name and try again')
 
-def find_console_by_id():
-    id_str = input("Enter the console's id: ").strip()
-    try:
-        id_ = int(id_str)   
-    except ValueError:
-        print(Fore.RED +"Error: id must be a number")
-        return
-
-    console = Console.find_by_id(id_)
-    print(console) if console else print(f'Console {id_} not found')
 
 def create_console():
     name = input(Fore.LIGHTMAGENTA_EX +"Enter the console's name:").strip().title()
@@ -137,7 +127,7 @@ def update_game(game):
         game.genre = new_genre
 
     game.update()
-    print(Fore.GRENN +f"Success: updated to {game.title}")
+    print(Fore.GREEN +f"Success: updated to {game.title}")
 
 def delete_game():
     id_str = input("Enter the game's id: ").strip()

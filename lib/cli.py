@@ -5,12 +5,10 @@ init(autoreset=True)
 
 from helpers import (
     exit_program,
-    list_consoles,
     find_console_by_name,
     create_console,
     update_console,
     delete_console,
-    list_games,
     find_game_by_name,
     create_game,
     update_game,

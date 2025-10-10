@@ -8,12 +8,12 @@ from helpers import find_console_by_name
 from helpers import list_games
 from helpers import find_game_by_id
 from helpers import update_game
+from helpers import list_consoles
 #import ipdb
 
-
+Game.drop_table()
 Console.drop_table()
 Console.create_table()
-Game.drop_table()
 Game.create_table()
 
 
@@ -32,9 +32,9 @@ print(c2)
 #c1.delete()
 #print(c1)
 
-print(Console.find_by_id(c1.id))
+#print(Console.find_by_id(c1.id))
 #print(Console.find_by_id(999))
-print(Console.get_all())
+#print(Console.get_all())
 
 g1 = Game("Metal Gear Solid", "action", c1.id)
 g2 = Game("Zelda", "adventure", c2.id)
@@ -46,16 +46,16 @@ g1.save()
 #print(g2)
 #print(g3)
 
-g2.delete()
+#g2.delete()
 #print(g2)
 
-print(Game.find_by_id(g1.id))
-print(Game.find_by_id(22))
-print(Game.get_all())
+#print(Game.find_by_id(g1.id))
+#print(Game.find_by_id(22))
+#print(Game.get_all())
 
 #create_console()
 list_games()
 #find_console_by_name()
 #find_game_by_id()
-update_game()
-list_games()
+#update_game()
+list_consoles()
